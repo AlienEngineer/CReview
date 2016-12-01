@@ -1,4 +1,4 @@
-﻿namespace CReview.Models
+﻿namespace CReview.CodeAnalizers.Models
 {
 
     public class FunctionSignature

@@ -1,17 +1,40 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using CReview.Models;
+using System;
+using CReview.CodeAnalizers.Models;
 
-namespace CReview
+namespace CReview.CodeAnalizers.CSharp.Decoders
 {
 
-    public class FunctionDecoder
+    public class CSharpFunctionDecoder : IFunctionDecoder
     {
         public Function DecodeFunction(string function)
         {
+            var functionLines = BreakFunctionIntoLines(function);
+
             return new Function
             {
-                Signature = DecodeSignature(function)
+                Signature = DecodeSignature(functionLines[0]),
+                Body = DecodeBody(functionLines)
+            };
+        }
+
+        private string[] BreakFunctionIntoLines(string function)
+        {
+            return function.Split(
+                new[] { "\r\n" }, 
+                StringSplitOptions.RemoveEmptyEntries
+            );
+        }
+
+        private FunctionBody DecodeBody(string[] function)
+        {
+            var lines = function.Skip(1)
+                .ToArray();
+            return new FunctionBody
+            {
+                LineCount = lines.Length,
+                Lines = lines
             };
         }
 
