@@ -55,7 +55,11 @@
   <ItemGroup>
     <Compile Include="CodeAnalyzers\CodeLineDecoder.cs" />
     <Compile Include="CodeAnalyzers\CSharpFunctionDecoderTests.cs" />
+    <Compile Include="Helpers\AssertComplex.cs" />
+    <Compile Include="Helpers\AssertPrivate.cs" />
+    <Compile Include="Helpers\FieldNotFoundException.cs" />
     <Compile Include="Helpers\IUnderTest.cs" />
+    <Compile Include="Helpers\ModelAssertion.cs" />
     <Compile Include="Helpers\SubjectUnderTest.cs" />
     <Compile Include="Helpers\UnderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

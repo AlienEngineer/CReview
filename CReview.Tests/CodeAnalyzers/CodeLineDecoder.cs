@@ -1,6 +1,7 @@
 ﻿using CReview.Tests.Helpers;
 using NUnit.Framework;
 using System.Linq;
+using System;
 
 namespace CReview.Tests.CodeAnalyzers
 {
@@ -10,7 +11,7 @@ namespace CReview.Tests.CodeAnalyzers
     {
         public string Stringify(Symbol[] symbols)
         {
-            return string.Join(", ", symbols.Select(e => e.Name));
+            return string.Join(" ", symbols.Select(e => e.Name));
         }
 
         [Test]
@@ -21,9 +22,27 @@ namespace CReview.Tests.CodeAnalyzers
             var decodedLine = Subject.DecodeLine(lineOfCode);
 
             Assert.That(decodedLine, Is.Not.Null);
-            Assert.That(Stringify(decodedLine.Symbols), Is.EqualTo("x"));
+            AssertSymbol(decodedLine.Symbols[0], Symbols.Declaration, "var");
+            AssertSymbol(decodedLine.Symbols[1], Symbols.Variable, "x");
+            AssertSymbol(decodedLine.Symbols[2], Symbols.Assignement, "=");
+            AssertSymbol(decodedLine.Symbols[3], Symbols.Constant, "10");
+            AssertSymbol(decodedLine.Symbols[4], Symbols.ExpressionEnd, ";");
         }
-        
+
+        private void AssertSymbol(Symbol symbol, Symbols symbolType, string value)
+        {
+            Assert.That(symbol.Name, Is.EqualTo(value));
+            Assert.That(symbol.Type, Is.EqualTo(symbolType));
+        }
+    }
+
+    public enum Symbols
+    {
+        Declaration,
+        Variable,
+        Assignement,
+        Constant,
+        ExpressionEnd
     }
 
     internal class CodeLineDecoder
@@ -32,9 +51,32 @@ namespace CReview.Tests.CodeAnalyzers
         {
             return new CodeLine
             {
-                Symbols = new [] {
-                    new Symbol{
+                Symbols = new [] 
+                {
+                    new Symbol
+                    {
+                        Type = Symbols.Declaration,
+                        Name = "var"
+                    },
+                    new Symbol
+                    {
+                        Type = Symbols.Variable,
                         Name = "x"
+                    },
+                    new Symbol
+                    {
+                        Type = Symbols.Assignement,
+                        Name = "="
+                    },
+                    new Symbol
+                    {
+                        Type = Symbols.Constant,
+                        Name = "10"
+                    },
+                    new Symbol
+                    {
+                        Type = Symbols.ExpressionEnd,
+                        Name = ";"
                     }
                 }
             };
@@ -49,5 +91,6 @@ namespace CReview.Tests.CodeAnalyzers
     public class Symbol
     {
         public string Name { get; set; }
+        public Symbols Type { get; set; }
     }
 }
