@@ -29,8 +29,7 @@ namespace CReview.CodeAnalizers.CSharp.Decoders
 
         private FunctionBody DecodeBody(string[] function)
         {
-            var lines = function.Skip(1)
-                .ToArray();
+            var lines = function.Skip(1).ToArray();
             return new FunctionBody
             {
                 LineCount = lines.Length,

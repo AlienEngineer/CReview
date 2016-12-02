@@ -53,7 +53,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSharpFunctionDecoderTests.cs" />
+    <Compile Include="CodeAnalyzers\CodeLineDecoder.cs" />
+    <Compile Include="CodeAnalyzers\CSharpFunctionDecoderTests.cs" />
     <Compile Include="Helpers\IUnderTest.cs" />
     <Compile Include="Helpers\SubjectUnderTest.cs" />
     <Compile Include="Helpers\UnderTest.cs" />
@@ -63,12 +64,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CReview.CodeAnalyzers.Models\CReview.CodeAnalyzers.Models.csproj">
-      <Project>{E161CDA1-F289-4BE8-A25D-AEDB36E79EC4}</Project>
+    <ProjectReference Include="..\CodeAnalyzers\CReview.CodeAnalizers.Interfaces\CReview.CodeAnalizers.Interfaces.csproj">
+      <Project>{91df5eed-e1c4-4401-bcc0-7a934fefe17f}</Project>
+      <Name>CReview.CodeAnalizers.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeAnalyzers\CReview.CodeAnalyzers.Models\CReview.CodeAnalyzers.Models.csproj">
+      <Project>{e161cda1-f289-4be8-a25d-aedb36e79ec4}</Project>
       <Name>CReview.CodeAnalyzers.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CReview.CodeAnalyzers\CReview.CodeAnalyzers.csproj">
-      <Project>{49600FA6-70D3-447F-B970-258715DCF58A}</Project>
+    <ProjectReference Include="..\CodeAnalyzers\CReview.CodeAnalyzers\CReview.CodeAnalyzers.csproj">
+      <Project>{49600fa6-70d3-447f-b970-258715dcf58a}</Project>
       <Name>CReview.CodeAnalyzers</Name>
     </ProjectReference>
     <ProjectReference Include="..\CReview\CReview.csproj">
