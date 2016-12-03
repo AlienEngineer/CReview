@@ -45,7 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CReview.CodeAnalizers.Interfaces\CReview.CodeAnalyzers.Interfaces.csproj">
+    <ProjectReference Include="..\CReview.CodeAnalyzers.Interfaces\CReview.CodeAnalyzers.Interfaces.csproj">
       <Project>{91df5eed-e1c4-4401-bcc0-7a934fefe17f}</Project>
       <Name>CReview.CodeAnalyzers.Interfaces</Name>
     </ProjectReference>
