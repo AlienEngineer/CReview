@@ -53,7 +53,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeAnalyzers\CodeLineDecoder.cs" />
+    <Compile Include="CodeAnalyzers\CodeLineDecoderTests.cs" />
     <Compile Include="CodeAnalyzers\CSharpFunctionDecoderTests.cs" />
     <Compile Include="Helpers\AssertComplex.cs" />
     <Compile Include="Helpers\AssertPrivate.cs" />

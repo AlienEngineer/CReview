@@ -40,10 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decoders\CodeLine.cs" />
     <Compile Include="Decoders\Function.cs" />
     <Compile Include="Decoders\FunctionArgument.cs" />
     <Compile Include="Decoders\FunctionBody.cs" />
     <Compile Include="Decoders\FunctionSignature.cs" />
+    <Compile Include="Decoders\Symbol.cs" />
+    <Compile Include="Decoders\Symbols.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
