@@ -1,13 +1,20 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using CReview.Decoders;
+using System;
 
 namespace CReview.CodeAnalyzers
 {
 
     public class CodeLineDecoder
     {
-        internal CodeLine DecodeLine(string lineOfCode)
+        static IDictionary<SymbolType, SymbolType> _translationTable = new Dictionary<SymbolType, SymbolType>
+        {
+            { SymbolType.Declaration, SymbolType.Variable },
+            { SymbolType.Assignement, SymbolType.Constant }
+        };
+
+        public CodeLine DecodeLine(string lineOfCode)
         {
             var codeParts = GetCodeParts(lineOfCode);
 
@@ -19,64 +26,110 @@ namespace CReview.CodeAnalyzers
 
         private static IEnumerable<Symbol> MakeSymbols(IList<string> codeParts)
         {
-            yield return new Symbol
-            {
-                Name = codeParts[0],
-                Type = Symbols.Declaration
-            };
-            yield return new Symbol
-            {
-                Name = codeParts[1],
-                Type = Symbols.Variable
-            };
+            var symbols = GetSymbols(codeParts);
 
-            for (int i = 2; i < codeParts.Count - 1; i++)
+            for (int position = 0; position < symbols.Count; position++)
             {
-                if (codeParts[i] == "=")
-                {
-                    yield return new Symbol
-                    {
-                        Name = "=",
-                        Type = Symbols.Assignement
-                    };
-                }
-
-                if (codeParts[i] == "10")
-                {
-                    yield return new Symbol
-                    {
-                        Name = "10",
-                        Type = Symbols.Constant
-                    };
-                }
+                var currentSymbol = symbols[position];
+                currentSymbol.Type = ResolveSymbolType(currentSymbol, position, symbols);
             }
 
-            yield return new Symbol
+            return symbols;
+        }
+
+        private static SymbolType ResolveSymbolType(Symbol currentSymbol, int position, IList<Symbol> symbols)
+        {
+            if (currentSymbol.Name.Contains("("))
             {
-                Name = ";",
-                Type = Symbols.ExpressionEnd
-            };
+                ReevaluatePreviousSymbolType(position, symbols);
+
+                return SymbolType.FunctionCall;
+            }
+
+            if (currentSymbol.Name == "new")
+            {
+                return SymbolType.Initialize;
+            }
+
+            if (position == 0)
+            {
+                return SymbolType.Declaration;
+            }
+
+            if (position == symbols.Count - 1)
+            {
+                return SymbolType.ExpressionEnd;
+            }
+
+            if (currentSymbol.Name == "=")
+            {
+                return SymbolType.Assignement;
+            }
+
+            return ResolveSymbolBasedOnPrevious(position, symbols);
+        }
+
+        private static void ReevaluatePreviousSymbolType(int position, IList<Symbol> symbols)
+        {
+            if (position == 0)
+            {
+                return;
+            }
+
+            Symbol previousSymbol = symbols[position - 1];
+            if (previousSymbol.Type == SymbolType.Assignement)
+            {
+                return;
+            }
+
+            previousSymbol.Type = ResolveSymbolBasedOnPrevious(position, symbols);
+        }
+
+        private static SymbolType ResolveSymbolBasedOnPrevious(int position, IList<Symbol> symbols)
+        {
+            SymbolType previousSymbol = symbols[position - 1].Type;
+            
+            return _translationTable.TryGetValue(previousSymbol, out var translatedSymbol)
+                ? translatedSymbol
+                : previousSymbol;
+        }
+
+        private static IList<Symbol> GetSymbols(IList<string> codeParts)
+        {
+            return codeParts
+                .Select(codePart => new Symbol { Name = codePart })
+                .ToList();
+        }
+
+        private static IEnumerable<string> MakeCodeParts(string lineOfCode)
+        {
+            string[] codeParts = lineOfCode.Split(' ');
+            foreach (var part in codeParts)
+            {
+                if (part.Contains("."))
+                {
+                    foreach (var subPart in part.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        yield return subPart;
+                    }
+                }
+                else if (part.EndsWith(";"))
+                {
+                    yield return part.Substring(0, part.Length - 1);
+                    yield return ";";
+                }
+                else
+                {
+                    yield return part;
+                }
+            }
         }
 
         private static IList<string> GetCodeParts(string lineOfCode)
         {
-            string[] codeParts = lineOfCode.Split(' ');
-
-            var lastPart = codeParts[codeParts.Length - 1];
-
-            if (lastPart.Last() == ';')
-            {
-                var codePiece = lastPart.Substring(0, lastPart.Length - 1);
-
-                var result = new List<string>(codeParts.Take(codeParts.Length - 1));
-
-                result.Add(codePiece);
-                result.Add(";");
-
-                return result;
-            }
-
-            return codeParts;
+            return MakeCodeParts(lineOfCode).ToList();
         }
+
+
     }
 }

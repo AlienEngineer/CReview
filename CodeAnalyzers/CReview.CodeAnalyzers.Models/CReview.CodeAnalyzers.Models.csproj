@@ -46,7 +46,7 @@
     <Compile Include="Decoders\FunctionBody.cs" />
     <Compile Include="Decoders\FunctionSignature.cs" />
     <Compile Include="Decoders\Symbol.cs" />
-    <Compile Include="Decoders\Symbols.cs" />
+    <Compile Include="Decoders\SymbolType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

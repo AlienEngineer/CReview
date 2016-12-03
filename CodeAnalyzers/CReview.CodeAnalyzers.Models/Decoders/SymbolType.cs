@@ -1,12 +1,15 @@
 ﻿namespace CReview.Decoders
 {
 
-    public enum Symbols
+    public enum SymbolType
     {
+        Unknown,
         Declaration,
         Variable,
         Assignement,
         Constant,
-        ExpressionEnd
+        ExpressionEnd,
+        FunctionCall,
+        Initialize
     }
 }

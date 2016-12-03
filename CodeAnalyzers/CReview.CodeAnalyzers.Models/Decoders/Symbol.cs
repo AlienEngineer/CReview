@@ -4,6 +4,6 @@
     public class Symbol
     {
         public string Name { get; set; }
-        public Symbols Type { get; set; }
+        public SymbolType Type { get; set; }
     }
 }
