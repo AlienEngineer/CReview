@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System;
-using CReview.CodeAnalizers.Models;
+using CReview.CodeAnalyzers.Models;
 
-namespace CReview.CodeAnalizers.CSharp.Decoders
+namespace CReview.CodeAnalyzers.CSharp.Decoders
 {
 
     public class CSharpFunctionDecoder : IFunctionDecoder

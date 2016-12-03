@@ -68,9 +68,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeAnalyzers\CReview.CodeAnalizers.Interfaces\CReview.CodeAnalizers.Interfaces.csproj">
+    <ProjectReference Include="..\CodeAnalyzers\CReview.CodeAnalizers.Interfaces\CReview.CodeAnalyzers.Interfaces.csproj">
       <Project>{91df5eed-e1c4-4401-bcc0-7a934fefe17f}</Project>
-      <Name>CReview.CodeAnalizers.Interfaces</Name>
+      <Name>CReview.CodeAnalyzers.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\CodeAnalyzers\CReview.CodeAnalyzers.Models\CReview.CodeAnalyzers.Models.csproj">
       <Project>{e161cda1-f289-4be8-a25d-aedb36e79ec4}</Project>

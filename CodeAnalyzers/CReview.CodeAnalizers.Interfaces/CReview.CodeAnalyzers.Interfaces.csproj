@@ -7,8 +7,8 @@
     <ProjectGuid>{91DF5EED-E1C4-4401-BCC0-7A934FEFE17F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CReview.CodeAnalizers.Interfaces</RootNamespace>
-    <AssemblyName>CReview.CodeAnalizers.Interfaces</AssemblyName>
+    <RootNamespace>CReview.CodeAnalyzers.Interfaces</RootNamespace>
+    <AssemblyName>CReview.CodeAnalyzers.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICodeLineDecoder.cs" />
     <Compile Include="IFunctionDecoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

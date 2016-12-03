@@ -6,7 +6,7 @@ using System;
 namespace CReview.CodeAnalyzers
 {
 
-    public class CodeLineDecoder
+    public class CodeLineDecoder : ICodeLineDecoder
     {
         static IDictionary<SymbolType, SymbolType> _translationTable = new Dictionary<SymbolType, SymbolType>
         {

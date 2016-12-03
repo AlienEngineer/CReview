@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CReview.Tests", "CReview.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalyzers", "CodeAnalyzers", "{61B006F7-671E-47CF-96EE-BB99B1C1734E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CReview.CodeAnalizers.Interfaces", "CodeAnalyzers\CReview.CodeAnalizers.Interfaces\CReview.CodeAnalizers.Interfaces.csproj", "{91DF5EED-E1C4-4401-BCC0-7A934FEFE17F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CReview.CodeAnalyzers.Interfaces", "CodeAnalyzers\CReview.CodeAnalizers.Interfaces\CReview.CodeAnalyzers.Interfaces.csproj", "{91DF5EED-E1C4-4401-BCC0-7A934FEFE17F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CReview.CodeAnalyzers", "CodeAnalyzers\CReview.CodeAnalyzers\CReview.CodeAnalyzers.csproj", "{49600FA6-70D3-447F-B970-258715DCF58A}"
 EndProject

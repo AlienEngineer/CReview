@@ -1,6 +1,6 @@
-﻿using CReview.CodeAnalizers.Models;
+﻿using CReview.CodeAnalyzers.Models;
 
-namespace CReview.CodeAnalizers
+namespace CReview.CodeAnalyzers
 {
     /// <summary>
     /// Decodes a function

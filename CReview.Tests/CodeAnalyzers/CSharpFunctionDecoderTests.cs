@@ -1,5 +1,5 @@
-﻿using CReview.CodeAnalizers.CSharp.Decoders;
-using CReview.CodeAnalizers.Models;
+﻿using CReview.CodeAnalyzers.CSharp.Decoders;
+using CReview.CodeAnalyzers.Models;
 using CReview.Tests.Helpers;
 using NUnit.Framework;
 using System.Linq;

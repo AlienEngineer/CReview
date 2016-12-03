@@ -1,4 +1,4 @@
-﻿namespace CReview.CodeAnalizers.Models
+﻿namespace CReview.CodeAnalyzers.Models
 {
 
     public class Function
