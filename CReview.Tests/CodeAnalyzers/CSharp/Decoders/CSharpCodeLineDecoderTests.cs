@@ -1,13 +1,13 @@
-﻿using CReview.CodeAnalyzers;
+﻿using CReview.CodeAnalyzers.CSharp.Decoders;
 using CReview.Decoders;
 using CReview.Tests.Helpers;
 using NUnit.Framework;
 
-namespace CReview.Tests.CodeAnalyzers
+namespace CReview.Tests.CodeAnalyzers.CSharp.Decoders
 {
 
     [TestFixture]
-    class CodeLineDecoderTests : UnderTest<CodeLineDecoder>
+    class CSharpCodeLineDecoderTests : UnderTest<CSharpCodeLineDecoder>
     {
         private void AssertSymbol(Symbol symbol, SymbolType symbolType, string value)
         {

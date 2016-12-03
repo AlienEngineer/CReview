@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using CReview.Decoders;
 using System;
 
-namespace CReview.CodeAnalyzers
+namespace CReview.CodeAnalyzers.CSharp.Decoders
 {
 
-    public class CodeLineDecoder : ICodeLineDecoder
+    public class CSharpCodeLineDecoder : ICodeLineDecoder
     {
         static IDictionary<SymbolType, SymbolType> _translationTable = new Dictionary<SymbolType, SymbolType>
         {

@@ -8,6 +8,13 @@ namespace CReview.CodeAnalyzers.CSharp.Decoders
 
     public class CSharpFunctionDecoder : IFunctionDecoder
     {
+        private ICodeLineDecoder _lineDecoder;
+
+        public CSharpFunctionDecoder(ICodeLineDecoder lineDecoder)
+        {
+            _lineDecoder = lineDecoder;
+        }
+
         public Function DecodeFunction(string function)
         {
             var functionLines = BreakFunctionIntoLines(function);
@@ -30,10 +37,16 @@ namespace CReview.CodeAnalyzers.CSharp.Decoders
         private FunctionBody DecodeBody(string[] function)
         {
             var lines = function.Skip(1).ToArray();
+
+            foreach (var line in lines)
+            {
+                _lineDecoder.DecodeLine(line);
+            }
+
             return new FunctionBody
             {
                 LineCount = lines.Length,
-                Lines = lines
+                RawLines = lines
             };
         }
 

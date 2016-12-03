@@ -53,8 +53,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeAnalyzers\CodeLineDecoderTests.cs" />
-    <Compile Include="CodeAnalyzers\CSharpFunctionDecoderTests.cs" />
+    <Compile Include="CodeAnalyzers\CSharp\Decoders\CSharpCodeLineDecoderTests.cs" />
+    <Compile Include="CodeAnalyzers\CSharp\Decoders\CSharpFunctionDecoderTests.cs" />
     <Compile Include="Helpers\AssertComplex.cs" />
     <Compile Include="Helpers\AssertPrivate.cs" />
     <Compile Include="Helpers\FieldNotFoundException.cs" />

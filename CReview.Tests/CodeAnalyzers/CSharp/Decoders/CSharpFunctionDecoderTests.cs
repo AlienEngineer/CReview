@@ -1,15 +1,21 @@
-﻿using CReview.CodeAnalyzers.CSharp.Decoders;
+﻿using CReview.CodeAnalyzers;
+using CReview.CodeAnalyzers.CSharp.Decoders;
 using CReview.CodeAnalyzers.Models;
 using CReview.Tests.Helpers;
+using Moq;
 using NUnit.Framework;
 using System.Linq;
 
-namespace CReview.Tests
+namespace CReview.Tests.CodeAnalyzers.CSharp.Decoders
 {
 
     [TestFixture]
     class CSharpFunctionDecoderTests : UnderTest<CSharpFunctionDecoder>
     {
+        protected override void SetDependencies(IUnderTest<CSharpFunctionDecoder> subject)
+        {
+            subject.DependsOn<ICodeLineDecoder>();
+        }
 
         private string RemakeSignature(FunctionSignature signature)
         {
@@ -46,9 +52,9 @@ void DoSomething()
 
             Assert.That(codeTree.Body, Is.Not.Null);
             Assert.That(codeTree.Body.LineCount, Is.EqualTo(3));
-            Assert.That(codeTree.Body.Lines[0], Is.EqualTo("{"));
-            Assert.That(codeTree.Body.Lines[1], Is.EqualTo("    "));
-            Assert.That(codeTree.Body.Lines[2], Is.EqualTo("}"));
+            Assert.That(codeTree.Body.RawLines[0], Is.EqualTo("{"));
+            Assert.That(codeTree.Body.RawLines[1], Is.EqualTo("    "));
+            Assert.That(codeTree.Body.RawLines[2], Is.EqualTo("}"));
         }
 
         [Test]
@@ -64,9 +70,27 @@ void DoSomething()
 
             Assert.That(codeTree.Body, Is.Not.Null);
             Assert.That(codeTree.Body.LineCount, Is.EqualTo(3));
-            Assert.That(codeTree.Body.Lines[0], Is.EqualTo("{"));
-            Assert.That(codeTree.Body.Lines[1], Is.EqualTo("    int x = 10;"));
-            Assert.That(codeTree.Body.Lines[2], Is.EqualTo("}"));
+            Assert.That(codeTree.Body.RawLines[0], Is.EqualTo("{"));
+            Assert.That(codeTree.Body.RawLines[1], Is.EqualTo("    int x = 10;"));
+            Assert.That(codeTree.Body.RawLines[2], Is.EqualTo("}"));
+        }
+
+        [Test]
+        public void When_decoding_a_function_with_1_line_of_code_it_should_return_a_body_decoded_lines()
+        {
+            var function = @"
+void DoSomething()
+{
+    int x = 10;
+}";
+
+            var codeTree = Subject.DecodeFunction(function);
+
+            Assert.That(codeTree.Body, Is.Not.Null);
+            Assert.That(codeTree.Body.LineCount, Is.EqualTo(3));
+            Verify<ICodeLineDecoder>(e => e.DecodeLine("{"), Times.Once);
+            Verify<ICodeLineDecoder>(e => e.DecodeLine("    int x = 10;"), Times.Once);
+            Verify<ICodeLineDecoder>(e => e.DecodeLine("}"), Times.Once);
         }
 
     }
